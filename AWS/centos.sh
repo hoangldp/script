@@ -21,3 +21,7 @@ sudo docker run -d -p 9000:9000 --name docker_admin -v /var/run/docker.sock:/var
 # sudo passwd root
 # sudo /etc/rc.d/init.d/webmin stop
 # sudo systemctl start webmin
+
+# sudo yum install git -y
+# git clone https://github.com/jc21/nginx-proxy-manager.git
+# sudo yum install docker-compose -y # https://docs.docker.com/compose/install/
