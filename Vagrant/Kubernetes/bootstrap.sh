@@ -15,6 +15,24 @@ echo "[TASK 2] Install docker container engine"
 # yum install -y -q docker-ce >/dev/null 2>&1
 curl -fsSL https://get.docker.com | sh >/dev/null 2>&1
 
+# Create /etc/docker directory.
+mkdir -p /etc/docker
+
+# Setup daemon.
+cat > /etc/docker/daemon.json <<EOF
+{
+  "exec-opts": ["native.cgroupdriver=systemd"],
+  "log-driver": "json-file",
+  "log-opts": {
+    "max-size": "100m"
+  },
+  "storage-driver": "overlay2",
+  "storage-opts": [
+    "overlay2.override_kernel_check=true"
+  ]
+}
+EOF
+
 # Enable docker service
 echo "[TASK 3] Enable and start docker service"
 systemctl enable docker >/dev/null 2>&1

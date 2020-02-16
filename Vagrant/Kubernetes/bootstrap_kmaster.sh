@@ -24,3 +24,14 @@ su - vagrant -c "kubectl create -f https://docs.projectcalico.org/manifests/cali
 # Generate Cluster join command
 echo "[TASK 4] Generate and save cluster join command to /joincluster.sh"
 kubeadm token create --print-join-command > /joincluster.sh
+
+# Create a systemd drop-in directory for the docker service
+mkdir -p /etc/systemd/system/docker.service.d
+
+cat >>/etc/systemd/system/docker.service.d/http-proxy.conf<<EOF
+[Service]
+Environment="HTTP_PROXY=http://proxy.example.com:80/"
+EOF
+
+systemctl daemon-reload
+systemctl restart docker
