@@ -25,3 +25,16 @@ sudo docker run -d -p 9000:9000 --name docker_admin -v /var/run/docker.sock:/var
 # sudo yum install git -y
 # git clone https://github.com/jc21/nginx-proxy-manager.git
 # sudo yum install docker-compose -y # https://docs.docker.com/compose/install/
+
+# https://github.com/angristan/openvpn-install
+# curl -O https://raw.githubusercontent.com/angristan/openvpn-install/master/openvpn-install.sh
+# sh openvpn-install.sh
+
+# https://github.com/kylemanna/docker-openvpn
+# OVPN_DATA="ovpn-data-example"
+# docker volume create --name $OVPN_DATA
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_genconfig -u udp://VPN.SERVERNAME.COM
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it kylemanna/openvpn ovpn_initpki
+# docker run -v $OVPN_DATA:/etc/openvpn -d -p 1194:1194/udp --cap-add=NET_ADMIN kylemanna/openvpn
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm -it kylemanna/openvpn easyrsa build-client-full CLIENTNAME nopass
+# docker run -v $OVPN_DATA:/etc/openvpn --log-driver=none --rm kylemanna/openvpn ovpn_getclient CLIENTNAME > CLIENTNAME.ovpn
